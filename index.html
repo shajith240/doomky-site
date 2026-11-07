@@ -162,10 +162,15 @@
     :root { --bar: 0px; }
     .bar { display: none; }
     :root { --section: 96px; }
-    .poster { display: grid; grid-template-columns: 1fr 380px; align-items: center; gap: 0 var(--s5); padding-top: var(--s5); }
+    /* the opening is one full screen, so the next section can't peek in underneath it */
+    .top { height: 72px; padding-top: var(--s3); }
+    .poster { display: grid; grid-template-columns: 1fr 380px; grid-template-rows: 1fr auto auto 1fr; align-items: center; gap: 0 var(--s5); padding: 0 0 var(--s5); height: calc(100svh - 72px); min-height: 520px; }
+    .poster h1 { grid-row: 2; }
+    .poster .pitch { grid-row: 3; }
+    .js .rot { margin-top: 0; }
     .poster h1 { font-size: clamp(64px, 6.6vw, 96px); grid-column: 1; align-self: end; }
     .poster .pitch { grid-column: 1; align-self: start; }
-    .poster img { grid-column: 2; grid-row: 1 / span 2; width: 100%; margin: 0; }
+    .poster img { grid-column: 2; grid-row: 1 / -1; width: 100%; margin: 0; max-height: 72svh; object-fit: contain; }
     .js .scene { flex-direction: row-reverse; justify-content: space-between; gap: var(--s6); padding-bottom: var(--s3); }
     .faces { width: min(64svh, 42vw); }
     .beats { flex: 1; }
