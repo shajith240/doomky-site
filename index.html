@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Doomky beta</title>
+<meta name="description" content="Doomky counts your reels and Shorts, and the monkey rots as you scroll. Android beta.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Tammudu+2:wght@800&family=Nunito+Sans:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  :root { --ink: #231A14; --cream: #FFF8E7; --fresh: #FFC629; --rotten: #6F8F3A; color-scheme: light; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--fresh); color: var(--ink); font: 600 17px/1.5 "Nunito Sans", system-ui, sans-serif; }
+  main { max-width: 560px; margin: 0 auto; padding: 32px 16px 48px; }
+  h1, h2 { font-family: "Baloo Tammudu 2", system-ui, sans-serif; font-weight: 800; line-height: 1.05; margin: 0; }
+  h1 { font-size: 44px; margin-top: 16px; }
+  h2 { font-size: 24px; margin-bottom: 8px; }
+  .faces { display: flex; justify-content: center; gap: 8px; }
+  .faces img { width: 45%; max-width: 200px; height: auto; }
+  .lead { margin: 12px 0 24px; }
+  .button { display: block; text-align: center; background: var(--ink); color: var(--cream); text-decoration: none; font: 800 20px "Baloo Tammudu 2", sans-serif; padding: 16px; border-radius: 16px; }
+  .button:focus-visible { outline: 3px solid var(--cream); outline-offset: 3px; }
+  .small { font-size: 14px; text-align: center; margin: 8px 0 0; }
+  .card { background: var(--cream); border: 2px solid var(--ink); border-radius: 16px; padding: 16px; margin-top: 24px; }
+  ol { margin: 0; padding-left: 22px; }
+  li { margin-bottom: 8px; }
+  a { color: var(--ink); }
+  footer { margin-top: 32px; font-size: 14px; text-align: center; }
+</style>
+</head>
+<body>
+<main>
+  <div class="faces">
+    <img src="stage_0.webp" alt="Doomky the monkey, fresh" width="200" height="200">
+    <img src="stage_4.webp" alt="Doomky the monkey, rotten after too many reels" width="200" height="200">
+  </div>
+  <h1>This is your brain on reels.</h1>
+  <p class="lead">Doomky counts the reels and Shorts you watch on Instagram and YouTube. The monkey rots as the count climbs, and at your daily limit it stops you. Compete with friends: fewest reels wins.</p>
+  <a class="button" href="https://github.com/shajith240/doomky-site/releases/latest/download/doomky.apk">Download the beta (Android)</a>
+  <p class="small">Android 8 or newer. Free. This is an early beta, so expect rough edges.</p>
+
+  <section class="card">
+    <h2>Install it</h2>
+    <ol>
+      <li>Open the downloaded file. If Android asks, allow your browser to install apps.</li>
+      <li>Open Doomky and follow the steps.</li>
+      <li>At "Turn on Doomky", Android may say the setting is restricted. Go to Settings, Apps, Doomky, tap the ⋮ menu at the top right, then <b>Allow restricted settings</b>. Go back and turn Doomky on.</li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <h2>Updating</h2>
+    <p style="margin:0">When a new version is out, Doomky shows "New version ready" on its home screen. Download it here again and install it over the old one. Your counts stay.</p>
+  </section>
+
+  <section class="card">
+    <h2>What Doomky sees</h2>
+    <p style="margin:0">Only whether a reel or Short is open in Instagram or YouTube, and when you move to the next one. It can't read captions, messages or anything you type. Read the <a href="privacy.html">privacy policy</a>.</p>
+  </section>
+
+  <footer>
+    <a href="privacy.html">Privacy policy</a> · <a href="https://github.com/shajith240/doomky-site/issues">Report a problem</a>
+  </footer>
+</main>
+</body>
+</html>
