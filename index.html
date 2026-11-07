@@ -42,8 +42,9 @@
 
   /* opening poster: the type is the picture, and he bites into it */
   .top { padding-top: var(--s3); }
+  .top .wordmark { display: block; }
   .wordmark { font-size: 26px; line-height: 1; text-decoration: none; }
-  .poster { position: relative; padding: var(--s3) 0 0; }
+  .poster { position: relative; padding: var(--s5) 0 0; }
   h1 { font-size: clamp(50px, 14.5vw, 112px); line-height: 1.02; letter-spacing: -.01em; }
   .section-title { font-size: clamp(38px, 8vw, 72px); line-height: 1.05; letter-spacing: -.01em; max-width: 12em; }
   .poster img { width: clamp(220px, 62vw, 460px); margin: var(--s2) auto 0; position: relative; }
@@ -72,35 +73,78 @@
   html:not(.js) .beat { grid-area: auto; opacity: 1; visibility: visible; margin-bottom: var(--s5); }
   html:not(.js) .faces { display: none; }
 
-  /* the stop: nothing else on the page interrupts you like this, and neither does anything else on your phone */
+  /* the stop: three ways past him, each one a real button in the app */
   .stop { padding: var(--section) 0; color: var(--cream); background: var(--ink); }
-  .stop .wrap { display: grid; gap: var(--s2); }
-  .stop img { width: min(280px, 72vw); margin: 0 auto var(--s1); }
-    .stop p { max-width: 32em; margin-top: var(--s2); }
-  .stop :focus-visible { outline-color: var(--cream); }
+  .stop .wrap { display: grid; gap: var(--s3); justify-items: center; text-align: center; }
+  .stop img { width: min(260px, 66vw); }
+  .ways { list-style: none; padding: 0; margin: var(--s3) 0 0; display: grid; gap: var(--s2); width: min(440px, 100%); }
+  .ways li { background: var(--cream); color: var(--ink); border-radius: 16px; box-shadow: 0 6px 0 var(--fresh); padding: 18px var(--s3) 15px; font: 800 22px/1.15 "Baloo Tammudu 2", sans-serif; }
+  .stop .note { margin-top: var(--s4); font-size: 20px; font-weight: 800; }
 
-  /* the real app, laid out by hand */
-  .inside { background: var(--cream); padding: var(--section) 0; }
-    .shots { display: flex; gap: var(--s2); margin: var(--s4) 0 var(--s5); overflow-x: auto; scroll-snap-type: x proximity; padding: var(--s1) 2px var(--s2); }
-  .shots figure { flex: 0 0 min(64vw, 300px); scroll-snap-align: start; }
-  .shots img { border: 3px solid var(--ink); border-radius: 26px; box-shadow: 0 7px 0 var(--ink); }
-  .shots figure:nth-child(2) { margin-top: var(--s3); }
-  .shots figcaption { font-weight: 800; margin-top: var(--s2); line-height: 1.3; }
-  .what { display: grid; gap: var(--s4) var(--s5); }
-  .what h3 { font-size: 26px; line-height: 1.15; }
-  .what p { margin-top: var(--s1); max-width: 32em; }
+  /* the show: a phone performs the app while you scroll. Each step is one state, so nothing can overlap */
+  .story { background: var(--cream); }
+  .stage { display: flex; flex-direction: column; align-items: center; gap: var(--s3); width: min(1120px, 100% - 40px); margin-inline: auto; padding: var(--s5) 0 var(--s4); }
+  .js .story { height: 620svh; }
+  .js .stage { position: sticky; top: 0; height: 100svh; padding: var(--s3) 0 calc(var(--bar) + var(--s2)); justify-content: center; }
+  .lines { display: grid; width: 100%; text-align: center; flex: none; }
+  .line { grid-area: 1 / 1; font-size: clamp(30px, 8vw, 72px); line-height: 1.08; letter-spacing: -.01em; opacity: 0; visibility: hidden; transition: opacity .16s linear, visibility 0s linear .16s; align-self: center; }
+  .line.on { opacity: 1; visibility: visible; transition: opacity .22s linear .1s, visibility 0s; }
+  html:not(.js) .phone { display: none; }
+  html:not(.js) .line { grid-area: auto; opacity: 1; visibility: visible; margin-bottom: var(--s3); }
 
-  /* setting it up: this really is a sequence */
+  .phone { position: relative; flex: none; height: min(calc(100svh - var(--bar) - 170px), 620px); aspect-ratio: 9 / 18.5; background: var(--cream); color: var(--ink); border: 3px solid var(--ink); border-radius: 34px; box-shadow: 0 8px 0 var(--ink); overflow: hidden; font-size: 13px; line-height: 1.3; --ease: cubic-bezier(.2,.8,.2,1); }
+  .ph-title { position: absolute; left: 16px; top: 14px; font: 800 20px/1 "Baloo Tammudu 2", sans-serif; }
+  .screen { position: absolute; inset: 40px 12px 58px; opacity: 0; transition: opacity .2s linear; }
+  .screen.on { opacity: 1; }
+  .seg { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); height: 34px; background: rgba(35,26,20,.08); border-radius: 10px; font-weight: 800; align-items: center; text-align: center; }
+  .seg::before { content: ""; position: absolute; top: 3px; bottom: 3px; left: 3px; width: calc(33.33% - 6px); background: #fff; border-radius: 8px; transition: transform .35s var(--ease); transform: translateX(calc(var(--seg, 0) * (100% + 6px))); }
+  .seg span { position: relative; color: rgba(35,26,20,.6); transition: color .16s linear; }
+  .seg span.on { color: var(--ink); }
+  .card { position: relative; margin-top: 10px; height: 74px; background: #fff; border: 2px solid var(--ink); border-radius: 12px; box-shadow: 0 3px 0 var(--ink); padding: 10px 12px; }
+  .card b { display: block; font: 800 30px/1 "Baloo Tammudu 2", sans-serif; }
+  .card img { position: absolute; right: 6px; top: 4px; width: 62px; height: 62px; opacity: 0; transition: opacity .2s linear; }
+  .card.top img { opacity: 1; }
+  .pane { position: absolute; inset: 128px 0 0; opacity: 0; transition: opacity .18s linear; }
+  .pane.on { opacity: 1; }
+  .row { position: absolute; left: 0; right: 0; top: 0; height: 48px; font-size: 14px; display: flex; align-items: center; gap: 8px; padding: 0 10px; border-radius: 10px; font-weight: 800; transition: transform .45s var(--ease), background-color .2s linear; transform: translateY(calc(var(--at) * 54px)); }
+  .row.me { background: var(--fresh); z-index: 1; }
+  .row i { font-style: normal; width: 16px; }
+  .row em { font-style: normal; flex: 1; min-width: 0; }
+  .row small { display: block; font-size: 10px; line-height: 1.1; color: #B91C1C; }
+  .row.me small { color: var(--ink); }
+  .alert { position: absolute; z-index: 3; left: 8px; right: 8px; top: 8px; background: var(--ink); color: var(--cream); padding: 10px 12px; border-radius: 14px; font-weight: 800; transform: translateY(-140%); transition: transform .4s var(--ease); }
+  .alert.on { transform: none; }
+  .alert small { display: block; font-weight: 600; opacity: .8; }
+  .versus { display: flex; justify-content: center; margin: 4px 0 0; }
+  .versus img { width: 46%; height: auto; }
+  .war-name { text-align: center; font: 800 20px/1.1 "Baloo Tammudu 2", sans-serif; }
+  .war-left { text-align: center; margin-bottom: 8px; }
+  .war-rows { position: relative; height: 108px; }
+  .month { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-top: 8px; }
+  .month span { aspect-ratio: 1; border-radius: 6px; display: grid; place-items: center; font-weight: 800; font-size: 10px; background: rgba(35,26,20,.06); color: rgba(35,26,20,.4); transition: background-color .25s linear; }
+  .brain-head { display: block; width: 104px; height: 104px; margin: 0 auto; }
+  .brain-t { text-align: center; font: 800 20px/1.1 "Baloo Tammudu 2", sans-serif; }
+  .tabs { position: absolute; left: 0; right: 0; bottom: 0; height: 54px; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 2px solid var(--ink); background: var(--cream); text-align: center; font-size: 10px; font-weight: 800; container-type: inline-size; }
+  .tabs::before { content: ""; position: absolute; top: 6px; width: 46px; height: 24px; left: calc(12.5cqw - 23px); background: var(--fresh); border-radius: 12px; transition: transform .35s var(--ease); transform: translateX(calc(var(--tab, 2) * 25cqw)); }
+  .tabs span { position: relative; align-self: end; padding-bottom: 6px; color: rgba(35,26,20,.6); }
+  .tabs span.on { color: var(--ink); }
+  .eg { font-size: 14px; flex: none; }
+
+  /* setup: only as long as it has to be */
   .setup { background: var(--fresh); padding: var(--section) 0; }
-    .setup ol { list-style: none; padding: 0; margin-top: var(--s4); counter-reset: s; display: grid; gap: var(--s3); max-width: 36em; }
-  .setup li { counter-increment: s; display: grid; grid-template-columns: var(--s6) 1fr; }
-  .setup li::before { content: counter(s); font: 800 56px/.9 "Baloo Tammudu 2", sans-serif; }
-  .setup b { display: block; font-size: 20px; line-height: 1.3; margin-bottom: 4px; }
-  .setup .get { margin-top: var(--s4); background: var(--cream); }
-
+  .setup ol { list-style: none; padding: 0; margin-top: var(--s4); counter-reset: s; display: grid; gap: var(--s2); }
+  .setup li { counter-increment: s; display: grid; grid-template-columns: var(--s5) 1fr; align-items: center; font: 800 clamp(22px, 3.4vw, 30px)/1.15 "Baloo Tammudu 2", sans-serif; }
+  .setup li::before { content: counter(s); font-size: 44px; line-height: 1; }
+  .setup .get { margin-top: var(--s4); }
+  details { max-width: 36em; }
+  details summary { cursor: pointer; font-weight: 800; padding: 12px 0; }
+  .setup details { margin-top: var(--s3); }
   .honest { background: var(--cream); padding: var(--section) 0; }
-    .honest .qa { margin-top: var(--s4); display: grid; gap: var(--s3); max-width: 36em; }
-  .honest h3 { font: 800 20px/1.3 "Nunito Sans", sans-serif; margin-bottom: 4px; }
+  .honest details { border-top: 2px solid var(--ink); }
+  .honest details:last-child { border-bottom: 2px solid var(--ink); }
+  .honest summary { font-size: 20px; padding: var(--s2) 0; }
+  .honest details p { padding-bottom: var(--s2); }
+  .qa { margin-top: var(--s4); }
   footer { background: var(--ink); color: var(--cream); padding: var(--s3) 0; font-size: 16px; }
   footer nav { display: flex; flex-wrap: wrap; gap: 0 var(--s3); }
   footer a { display: inline-block; padding: 12px 0; }
@@ -118,23 +162,24 @@
     :root { --bar: 0px; }
     .bar { display: none; }
     :root { --section: 96px; }
-    .poster { display: grid; grid-template-columns: 1fr 380px; align-items: center; gap: 0 var(--s5); padding-top: var(--s4); }
+    .poster { display: grid; grid-template-columns: 1fr 380px; align-items: center; gap: 0 var(--s5); padding-top: var(--s5); }
     .poster h1 { font-size: clamp(64px, 6.6vw, 96px); grid-column: 1; align-self: end; }
     .poster .pitch { grid-column: 1; align-self: start; }
     .poster img { grid-column: 2; grid-row: 1 / span 2; width: 100%; margin: 0; }
     .js .scene { flex-direction: row-reverse; justify-content: space-between; gap: var(--s6); padding-bottom: var(--s3); }
     .faces { width: min(64svh, 42vw); }
     .beats { flex: 1; }
-    .stop .wrap { grid-template-columns: auto 1fr; align-items: center; gap: var(--s2) var(--s6); }
-    .stop img { width: 340px; margin: 0; }
-    .shots { overflow: visible; }
-    .shots figure { flex: 1 1 0; }
-    .shots figure:nth-child(2) { margin-top: var(--s5); }
-    .what { grid-template-columns: 1fr 1fr; }
+    .js .stage { flex-direction: row; justify-content: space-between; gap: var(--s6); padding-bottom: var(--s3); }
+    .lines { flex: 1; text-align: left; }
+    .line { font-size: clamp(48px, 5.4vw, 76px); }
+    .phone { height: min(calc(100svh - 80px), 680px); order: 2; }
+    .eg { position: absolute; left: 0; bottom: var(--s4); }
+    .stage { position: relative; }
+    .js .stage { position: sticky; }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    body, .faces img, .get, .bar, .bar a { transition: none; }
+    body, .faces img, .get, .bar, .bar a, .beat, .line, .screen, .pane, .row, .alert, .tabs::before, .seg::before, .month span, .card img { transition: none !important; }
   }
 </style>
 </head>
@@ -147,7 +192,7 @@
     <h1>This is your<br>brain on reels.</h1>
     <img src="stage_4.webp" width="512" height="512" alt="Doomky the monkey, rotten: grey-green, bald patches, tongue out, flies around his head.">
     <div class="pitch">
-      <p class="lede">Doomky is a monkey who lives on your phone. Every reel and Short you watch rots him a little more. At your limit, he stops you.</p>
+      <p class="lede">A monkey that rots with every reel you watch.</p>
       <a class="get" href="https://github.com/shajith240/doomky-site/releases/latest/download/doomky.apk">Download for Android</a>
       <p class="fine">Free beta. 3.4 MB. Not on iPhone yet.</p>
     </div>
@@ -196,56 +241,94 @@
   <section class="stop">
     <div class="wrap">
       <img src="pose_stop.webp" width="720" height="720" alt="Doomky standing with both palms out, shouting stop." loading="lazy">
-      <div class="words">
       <h2 class="section-title">Then he stops you.</h2>
-      <p>Pick a daily limit. When you hit it, Doomky covers the reel and the sound goes quiet.</p>
-      <p>Want more? You get one free pass a day. After that it costs bananas you earned, or real money paid to a friend.</p>
-      <p>Make a promise and there are no extras at all. Quitting takes 24 hours.</p>
-      </div>
+      <ul class="ways" aria-label="The ways past your limit">
+        <li>One free pass a day</li>
+        <li>Spend bananas you earned</li>
+        <li>Pay a friend real money</li>
+      </ul>
+      <p class="note">Or make a promise: no extras at all.</p>
     </div>
   </section>
 
-  <section class="inside">
-    <div class="wrap">
-      <h2 class="section-title">Fewest reels wins.</h2>
-      <div class="shots">
-        <figure><img src="screen_today.webp" width="600" height="1335" alt="The Today screen: Doomky hypnotised on a pink background, 63 of 50 reels today, 27 minutes lost." loading="lazy"><figcaption>Today. How bad it is right now.</figcaption></figure>
-        <figure><img src="screen_ranks.webp" width="600" height="1335" alt="The Ranks screen: tabs for Everyone, Friends and Wars, with your place on the board." loading="lazy"><figcaption>Ranks. Who's beating you.</figcaption></figure>
-        <figure><img src="screen_brain.webp" width="600" height="1335" alt="The Brain screen: a month calendar coloured by how rotten each day was." loading="lazy"><figcaption>Brain. Whether you're getting better.</figcaption></figure>
+  <section class="story" aria-label="What's in the app">
+    <div class="stage">
+      <div class="lines">
+        <h2 class="line on">Everyone's on one board.</h2>
+        <h2 class="line">Fewer reels, higher rank.</h2>
+        <h2 class="line">#1. Now stay there.</h2>
+        <h2 class="line">Swap codes with friends.</h2>
+        <h2 class="line">Know when they slip.</h2>
+        <h2 class="line">Start a war.</h2>
+        <h2 class="line">Watch your month get better.</h2>
       </div>
-      <div class="what">
-        <div><h3>A live leaderboard</h3><p>Everyone who's logged in, ranked by fewest reels, today and this week. Switch Doomky off and you drop off the board.</p></div>
-        <div><h3>Friends and wars</h3><p>Swap codes and you see each other's counts. Doomky tells you when a friend breaks their limit. Start a war for a few days and see who lasts.</p></div>
-        <div><h3>Bananas</h3><p>Stay under your limit and you earn them. Spend them on five more reels or a streak freeze. You can't buy them or cash them out.</p></div>
-        <div><h3>Pay a friend</h3><p>Scan their UPI QR once. Past your limit, one tap opens your own UPI app with everything filled in. You enter your PIN. Doomky never touches the money.</p></div>
-        <div><h3>On your home screen</h3><p>A widget shows today's count and his face, so you see the damage before you open anything.</p></div>
-        <div><h3>A card to share</h3><p>Your day as a picture for your Status, rotten monkey included.</p></div>
+      <div class="phone" aria-hidden="true">
+        <div class="ph-title" data-title>Ranks</div>
+        <div class="alert"><span>@ravi broke their limit</span><small>84 reels today. Are you doing better?</small></div>
+        <div class="screen on" data-screen="ranks">
+          <div class="seg"><span class="on">Everyone</span><span>Friends</span><span>Wars</span></div>
+          <div class="pane on" data-pane="board" style="inset:50px 0 0">
+            <div class="card"><b data-rank>#4</b><span data-reels>34 reels today</span><img src="pose_crown.webp" alt="" width="62" height="62" loading="lazy"></div>
+            <div style="position:absolute;inset:88px 0 0" data-rows></div>
+          </div>
+          <div class="pane" data-pane="friends" style="inset:50px 0 0">
+            <div class="card"><b>#1</b><span>8 reels today</span></div>
+            <div style="position:absolute;inset:88px 0 0">
+              <div class="row me" style="--at:0"><i>1</i><em>@you</em>8</div>
+              <div class="row" style="--at:1"><i>2</i><em>@sai</em>22</div>
+              <div class="row" style="--at:2"><i>3</i><em>@neha</em>31</div>
+              <div class="row" style="--at:3"><i>4</i><em>@ravi<small>Over their limit</small></em>84</div>
+              <div class="row" style="--at:4"><i>-</i><em>@kiran<small>Went quiet</small></em>0</div>
+            </div>
+          </div>
+          <div class="pane" data-pane="wars" style="inset:44px 0 0">
+            <div class="versus"><img src="stage_0.webp" alt="" width="512" height="512" loading="lazy"><img src="stage_4.webp" alt="" width="512" height="512" loading="lazy"></div>
+            <div class="war-name">Hostel war</div>
+            <div class="war-left">3 days left</div>
+            <div class="war-rows">
+              <div class="row me" style="--at:0"><i>1</i><em>@you</em>41</div>
+              <div class="row" style="--at:1"><i>2</i><em>@sai</em>96</div>
+            </div>
+          </div>
+        </div>
+        <div class="screen" data-screen="brain">
+          <img class="brain-head" src="stage_1.webp" alt="" width="512" height="512" loading="lazy">
+          <div class="brain-t">Your brain: Dazed</div>
+          <div class="month"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span></div>
+        </div>
+        <div class="tabs"><span>Today</span><span>Brain</span><span class="on">Ranks</span><span>You</span></div>
       </div>
+      <p class="eg">Example names and numbers.</p>
     </div>
   </section>
 
   <section class="setup" id="setup">
     <div class="wrap">
-      <h2 class="section-title">Setting it up.</h2>
+      <h2 class="section-title">Get him on your phone.</h2>
       <ol>
-        <li><div><b>Download it and open the file.</b> Android asks if your browser can install apps. Say yes. It may warn you because this isn't from the Play Store yet.</div></li>
-        <li><div><b>Open Doomky and follow the steps.</b> Pick your limit and make a promise if you dare.</div></li>
-        <li><div><b>Turn Doomky on in Accessibility.</b> If Android says the setting is restricted: go to Settings, Apps, Doomky, tap the ⋮ at the top right, then Allow restricted settings. Go back and turn it on.</div></li>
-        <li><div><b>Log in with Google to join the leaderboard.</b> Or skip it, and nothing leaves your phone.</div></li>
+        <li>Download and install</li>
+        <li>Pick your limit</li>
+        <li>Turn Doomky on</li>
+        <li>Log in with Google</li>
       </ol>
       <a class="get" href="https://github.com/shajith240/doomky-site/releases/latest/download/doomky.apk">Download for Android</a>
+      <details>
+        <summary>Android says the setting is restricted?</summary>
+        <p>This happens with apps from outside the Play Store. Go to Settings, Apps, Doomky, tap the ⋮ at the top right, then Allow restricted settings. Go back and turn Doomky on.</p>
+      </details>
     </div>
   </section>
 
   <section class="honest">
     <div class="wrap">
-      <h2 class="section-title">Why does it need Accessibility?</h2>
+      <h2 class="section-title">Is it safe?</h2>
       <div class="qa">
-        <div><h3>What can it see?</h3><p>Only inside Instagram and YouTube, and only which screen is open and when you move to the next reel. It can't read captions, messages or anything you type. The <a href="privacy.html">privacy policy</a> has the full list.</p></div>
-        <div><h3>Who sees my count?</h3><p>If you log in, your name and reel count are on the public board. If you don't, nobody does.</p></div>
-        <div><h3>Does it work on every phone?</h3><p>Some phones kill apps to save battery. If Doomky keeps switching off, Settings has a fix for each brand.</p></div>
-        <div><h3>How do updates work?</h3><p>Doomky tells you when a new version is ready. Download it here again and install it over the old one. Your counts stay.</p></div>
-        <div><h3>This is a beta</h3><p>Expect rough edges. If something breaks, <a href="https://github.com/shajith240/doomky-site/issues">tell us here</a> or just message the friend who sent you this link.</p></div>
+        <details><summary>What can it see?</summary><p>Only inside Instagram and YouTube, and only which screen is open and when you move to the next reel. It can't read captions, messages or anything you type. Details are in the <a href="privacy.html">privacy policy</a>.</p></details>
+        <details><summary>Who sees my count?</summary><p>If you log in, your name and reel count are on the public board. If you don't, nothing leaves your phone.</p></details>
+        <details><summary>Does Doomky take my money?</summary><p>No. Paying a friend opens your own UPI app, and you enter your own PIN. Bananas are points you earn. You can't buy them or cash them out.</p></details>
+        <details><summary>It keeps switching off</summary><p>Some phones shut apps down to save battery. In Doomky, open You, the gear, then Keep Doomky running.</p></details>
+        <details><summary>How do updates work?</summary><p>Doomky tells you when a new version is ready. Download it here again and install it over the old one. Your counts stay.</p></details>
+        <details><summary>Something broke</summary><p>This is an early beta. <a href="https://github.com/shajith240/doomky-site/issues">Tell us here</a>, or message the friend who sent you this link.</p></details>
       </div>
     </div>
   </section>
@@ -304,6 +387,77 @@
     addEventListener('scroll', place, { passive: true });
     addEventListener('resize', place);
     place();
+    // the show: scroll position chooses one state of the phone
+    (function () {
+      var story = document.querySelector('.story');
+      var lines = document.querySelectorAll('.line'), phone = document.querySelector('.phone');
+      var rowsBox = phone.querySelector('[data-rows]');
+      var people = { you: 'you', priya: 'priya', arjun: 'arjun', sneha: 'sneha', rahul: 'rahul' }, rows = {};
+      Object.keys(people).forEach(function (n) {
+        var r = document.createElement('div');
+        r.className = 'row' + (n === 'you' ? ' me' : '');
+        r.innerHTML = '<i></i><em>@' + n + '</em><span></span>';
+        rowsBox.appendChild(r); rows[n] = r;
+      });
+      var boards = [
+        [['priya', 12], ['arjun', 19], ['sneha', 27], ['you', 34], ['rahul', 41]],
+        [['priya', 12], ['you', 18], ['arjun', 19], ['sneha', 27], ['rahul', 41]],
+        [['you', 8], ['priya', 12], ['arjun', 19], ['sneha', 27], ['rahul', 41]]
+      ];
+      var cells = phone.querySelectorAll('.month span');
+      // example month that starts rotten and gets better
+      var rotting = [3,3,4,2,3,3,2,2,3,2,2,1,2,2,1,1,2,1,1,0,1,1,0,1,0,0,1,0,0,0];
+      var colours = ['--fresh','--dazed','--hooked','--cooked','--rotten'];
+      var seg = phone.querySelectorAll('.seg span'), tabs = phone.querySelectorAll('.tabs span');
+      var screens = { ranks: phone.querySelector('[data-screen=ranks]'), brain: phone.querySelector('[data-screen=brain]') };
+      var panes = { board: phone.querySelector('[data-pane=board]'), friends: phone.querySelector('[data-pane=friends]'), wars: phone.querySelector('[data-pane=wars]') };
+      var alert = phone.querySelector('.alert'), title = phone.querySelector('[data-title]'), card = phone.querySelector('.card');
+      var current = -1;
+      function board(step) {
+        boards[step].forEach(function (p, i) {
+          var r = rows[p[0]];
+          r.style.setProperty('--at', i);
+          r.querySelector('i').textContent = i + 1;
+          r.querySelector('span').textContent = p[1];
+          if (p[0] === 'you') {
+            phone.querySelector('[data-rank]').textContent = '#' + (i + 1);
+            phone.querySelector('[data-reels]').textContent = p[1] + ' reels today';
+          }
+        });
+        card.classList.toggle('top', step === 2);
+      }
+      function perform(step) {
+        if (step === current) return;
+        current = step;
+        lines.forEach(function (l, i) { l.classList.toggle('on', i === step); });
+        var section = step < 3 ? 0 : step < 5 ? 1 : 2, brain = step === 6;
+        board(Math.min(step, 2));
+        phone.querySelector('.seg').style.setProperty('--seg', section);
+        seg.forEach(function (s, i) { s.classList.toggle('on', i === section); });
+        panes.board.classList.toggle('on', section === 0);
+        panes.friends.classList.toggle('on', section === 1);
+        panes.wars.classList.toggle('on', section === 2);
+        alert.classList.toggle('on', step === 4);
+        screens.ranks.classList.toggle('on', !brain);
+        screens.brain.classList.toggle('on', brain);
+        title.textContent = brain ? 'Your brain' : 'Ranks';
+        phone.querySelector('.tabs').style.setProperty('--tab', brain ? 1 : 2);
+        tabs.forEach(function (t, i) { t.classList.toggle('on', i === (brain ? 1 : 2)); });
+        cells.forEach(function (c, i) {
+          c.style.transitionDelay = brain && !calm ? i * 25 + 'ms' : '0ms';
+          c.style.backgroundColor = brain ? 'var(' + colours[rotting[i]] + ')' : '';
+          c.style.color = brain ? 'var(--ink)' : '';
+        });
+      }
+      function place() {
+        var box = story.getBoundingClientRect();
+        var travelled = -box.top / Math.max(1, box.height - innerHeight);
+        perform(Math.max(0, Math.min(lines.length - 1, Math.floor(travelled * lines.length))));
+      }
+      addEventListener('scroll', place, { passive: true });
+      addEventListener('resize', place);
+      place();
+    })();
     // the bar only arrives once the main button has gone, so there's never two of them on screen
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (entries) {
