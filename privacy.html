@@ -27,7 +27,7 @@
   <p>Last updated 7 November 2026. This covers the Doomky app for Android.</p>
 
   <h2>The short version</h2>
-  <p>Doomky works entirely on your phone unless you log in. It never reads your messages, captions or what you type. It has no ads and no analytics, and it never sells your data.</p>
+  <p>Doomky works entirely on your phone unless you log in. It never reads your messages, captions or what you type. It has no ads and no analytics, and it never sells your data. If you log in and Doomky crashes, it sends a technical crash report so we can fix it.</p>
 
   <h2>What the app sees</h2>
   <p>Doomky uses Android's Accessibility service, only inside Instagram and YouTube. From those apps it reads screen layout information: which screen is open and which reel or Short is in the middle of the screen. That's how it counts reels and shows your count. It does not read text, captions, comments, messages, or anything you type. It also uses this access to show the count on the edge of your screen and to show the stop screen at your limit.</p>
@@ -36,7 +36,7 @@
   <ul>
     <li>Your daily reel counts and time spent on reels, split by app.</li>
     <li>Your settings: daily limit, goal, language and promise.</li>
-    <li>If you use "Pay a friend": your friend's name, their UPI ID and the amount. Doomky only opens your own UPI app. It never handles or sees payments.</li>
+    <li>If you use "Pay a friend": your friend's name, their UPI ID and the amount. Doomky only opens your own UPI app. It never handles or sees payments. A scanned QR is read only to fill in those details.</li>
   </ul>
   <p>Uninstalling Doomky deletes all of this.</p>
 
@@ -46,7 +46,9 @@
     <li>Your email address, to recognise your account.</li>
     <li>The name you pick (your @handle).</li>
     <li>Your daily totals: number of reels, time on reels, whether Doomky was switched on, and when each total was last updated.</li>
-    <li>The Friendly Wars you start or join.</li>
+    <li>The Friendly Wars you start or join, the friends you add and the people you block or report.</li>
+    <li>Your daily limit, so friends can see if you go over it, and your bananas (points you earn in the app).</li>
+    <li>Crash reports: a technical error trace and the app version. They don't include what you were watching.</li>
   </ul>
   <p>We don't store your profile picture or your Google name.</p>
 
@@ -54,6 +56,7 @@
   <ul>
     <li><b>The public leaderboard:</b> anyone logged in to Doomky can see your @handle and your reel count for today and this week.</li>
     <li><b>Friendly Wars:</b> people in a war with you see your @handle, your totals during the war, and whether you're still reporting.</li>
+    <li><b>Friends:</b> people who add your code, or whose code you add, see your @handle, your reel counts, whether you're still reporting, and when you go over your limit. Remove or block someone at any time to stop this.</li>
     <li>Nobody else sees your email.</li>
   </ul>
 
@@ -62,6 +65,7 @@
 
   <h2>Other services</h2>
   <ul>
+    <li><b>Google Play services</b> run the QR scanner and read QR screenshots on your phone. Doomky never gets camera access.</li>
     <li><b>Google</b> handles login, under <a href="https://policies.google.com/privacy">Google's privacy policy</a>.</li>
     <li><b>GitHub:</b> the app checks GitHub for a newer version every few hours. GitHub sees your IP address, as with any website visit.</li>
   </ul>
