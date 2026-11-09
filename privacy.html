@@ -120,7 +120,7 @@
           <tr><td>Bananas you earned or spent, and streak milestones</td><td>So your bananas and rewards are correct and can't be faked from a phone.</td></tr>
           <tr><td>Friends, friend requests you send and receive, wars you start or join</td><td>To run the friends and wars features.</td></tr>
           <tr><td>People you block, and reports you make about other people (with the reason you choose)</td><td>To keep the leaderboard safe and act on abuse.</td></tr>
-          <tr><td>A phone ID: a one-way scrambled (salted SHA-256) version of your phone's Android ID, plus the highest reel count and time this phone recorded each day. The real Android ID never leaves your phone.</td><td>To keep the leaderboard fair: one phone's reels count for one account per day, and switching accounts on the same phone can't give anyone a clean day. Sent only while you are signed in.</td></tr>
+          <tr><td>A phone ID: a one-way scrambled (salted SHA-256) version of your phone's Android ID, plus the highest reel count and time this phone recorded each day, and how many of those reels and how much of that time happened while your account was signed in. The real Android ID never leaves your phone.</td><td>To keep the leaderboard fair: the first account on a phone is ranked on everything watched on that phone, and other accounts on it show only their own reels and aren't ranked. So switching accounts or signing out can't hide reels. Sent only while you are signed in.</td></tr>
           <tr><td>Counters of how often you search or send requests</td><td>To stop spam and abuse.</td></tr>
         </tbody>
       </table></div>
@@ -202,7 +202,7 @@
           <tr><td>Usage events linked to your account</td><td>Deleted when you delete your account.</td></tr>
           <tr><td>Usage events and crash records tied only to a random install ID</td><td>Kept only as long as needed to fix problems and understand how the app is used. They contain no name or email and cannot be linked back to you once your account is deleted.</td></tr>
           <tr><td>Crash reports at Sentry</td><td>Deleted automatically by Sentry at the end of its retention period, at most 90 days.</td></tr>
-          <tr><td>Phone ID and its daily counts</td><td>The link between your account and the phone is deleted when you delete your account. The phone's daily counts stay, tied to no one, so the same phone can't restart a day by making a new account.</td></tr>
+          <tr><td>Phone ID and its daily counts</td><td>Your account's own per-phone counts and its link to the phone are deleted when you delete your account. The phone's daily counts stay, tied to no one, so the same phone can't restart a day by making a new account.</td></tr>
           <tr><td>Push notification token</td><td>Until it changes, you delete your account, or you uninstall the app.</td></tr>
         </tbody>
       </table></div>
