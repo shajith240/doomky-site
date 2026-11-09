@@ -15,7 +15,8 @@
 <link rel="icon" href="stage_0.webp" type="image/webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+Tammudu+2:wght@800&family=Nunito+Sans:opsz,wght@6..12,600;6..12,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Tammudu+2:wght@800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
 <style>
   :root {
     --ink: #231A14; --cream: #FFF8E7;
@@ -33,7 +34,7 @@
     transition: background-color .7s linear;
     padding-bottom: var(--bar);
   }
-  h1, h2, h3, .count, .wordmark { font-family: "Baloo Tammudu 2", system-ui, sans-serif; font-weight: 800; }
+  h1, h2, h3, .count { font-family: "Baloo Tammudu 2", system-ui, sans-serif; font-weight: 800; }
   h1, h2, h3, p, ol, ul, figure { margin: 0; }
   img { display: block; max-width: 100%; height: auto; }
   a { color: inherit; }
@@ -41,9 +42,6 @@
   .wrap { width: min(1120px, 100% - 40px); margin-inline: auto; }
 
   /* opening poster: the type is the picture, and he bites into it */
-  .top { padding-top: var(--s3); }
-  .top .wordmark { display: block; }
-  .wordmark { font-size: 26px; line-height: 1; text-decoration: none; }
   .poster { position: relative; padding: var(--s5) 0 0; }
   h1 { font-size: clamp(50px, 14.5vw, 112px); line-height: 1.02; letter-spacing: -.01em; }
   .section-title { font-size: clamp(38px, 8vw, 72px); line-height: 1.05; letter-spacing: -.01em; max-width: 12em; }
@@ -145,10 +143,6 @@
   .honest summary { font-size: 20px; padding: var(--s2) 0; }
   .honest details p { padding-bottom: var(--s2); }
   .qa { margin-top: var(--s4); }
-  footer { background: var(--ink); color: var(--cream); padding: var(--s3) 0; font-size: 16px; }
-  footer nav { display: flex; flex-wrap: wrap; gap: 0 var(--s3); }
-  footer a { display: inline-block; padding: 12px 0; }
-  footer :focus-visible { outline-color: var(--cream); }
 
   /* the button stays in reach, because people arrive from a chat, on a phone */
   .bar { position: fixed; inset: auto 0 0; z-index: 5; padding: 10px var(--s2) calc(14px + env(safe-area-inset-bottom)); background: var(--ink); display: flex; align-items: center; gap: 14px; transform: translateY(100%); transition: transform .28s cubic-bezier(.2,.8,.2,1); }
@@ -163,7 +157,6 @@
     .bar { display: none; }
     :root { --section: 96px; }
     /* the opening is one full screen, so the next section can't peek in underneath it */
-    .top { height: 72px; padding-top: var(--s3); }
     .poster { display: grid; grid-template-columns: 1fr 380px; grid-template-rows: 1fr auto auto 1fr; align-items: center; gap: 0 var(--s5); padding: 0 0 var(--s5); height: calc(100svh - 72px); min-height: 520px; }
     .poster h1 { grid-row: 2; }
     .poster .pitch { grid-row: 3; }
@@ -190,9 +183,18 @@
 </head>
 <body>
 
-<header class="top wrap"><span class="wordmark">doomky</span></header>
+<a class="skip" href="#main">Skip to content</a>
+<header class="wrap site-header">
+  <a class="brand" href="./"><span class="brand-mark"><img src="stage_0.webp" width="30" height="30" alt=""></span><span>doomky</span></a>
+  <nav class="site-nav" aria-label="Main">
+    <a class="wide" href="./#safety">Safety</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="support.html">Help</a>
+    <a class="btn-sm" href="https://github.com/shajith240/doomky-site/releases/latest/download/doomky.apk">Download</a>
+  </nav>
+</header>
 
-<main>
+<main id="main">
   <section class="wrap poster">
     <h1>This is your<br>brain on reels.</h1>
     <img src="stage_4.webp" width="512" height="512" alt="Doomky the monkey, rotten: grey-green, bald patches, tongue out, flies around his head.">
@@ -324,29 +326,46 @@
     </div>
   </section>
 
-  <section class="honest">
+  <section class="honest" id="safety">
     <div class="wrap">
       <h2 class="section-title">Is it safe?</h2>
       <div class="qa">
         <details><summary>What can it see?</summary><p>Only inside Instagram and YouTube, and only which screen is open and when you move to the next reel. It can't read captions, messages or anything you type. Details are in the <a href="privacy.html">privacy policy</a>.</p></details>
-        <details><summary>Who sees my count?</summary><p>If you log in, your name and reel count are on the public board. If you don't, nothing leaves your phone.</p></details>
+        <details><summary>Who sees my count?</summary><p>If you log in, your @handle and reel count are on the board other Doomky users see, and friends see when you go over your limit. Nobody sees your email. If you don't log in, your counts never leave your phone.</p></details>
+        <details><summary>Can I delete my data?</summary><p>Yes, any time. In Doomky, open Settings, Account, Delete account. It is gone from our servers straight away. <a href="delete-account.html">More on deleting your account</a>.</p></details>
         <details><summary>Does Doomky take my money?</summary><p>No. Paying a friend opens your own UPI app, and you enter your own PIN. Bananas are points you earn. You can't buy them or cash them out.</p></details>
         <details><summary>It keeps switching off</summary><p>Some phones shut apps down to save battery. In Doomky, open You, the gear, then Keep Doomky running.</p></details>
         <details><summary>How do updates work?</summary><p>Doomky tells you when a new version is ready. Download it here again and install it over the old one. Your counts stay.</p></details>
-        <details><summary>Something broke</summary><p>This is an early beta. <a href="https://github.com/shajith240/doomky-site/issues">Tell us here</a>, or message the friend who sent you this link.</p></details>
+        <details><summary>Something broke</summary><p>This is an early beta. <a href="https://github.com/shajith240/doomky-site/issues">Tell us here</a>, email <a href="mailto:shajith240@gmail.com">shajith240@gmail.com</a>, or see <a href="support.html">help and contact</a>.</p></details>
       </div>
     </div>
   </section>
 </main>
 
-<footer>
-  <div class="wrap">
-    <nav aria-label="Legal">
-      <a href="privacy.html">Privacy policy</a>
-      <a href="terms.html">Terms</a>
-      <a href="https://github.com/shajith240/doomky-site/issues">Report a problem</a>
-    </nav>
+<footer class="site-footer">
+  <div class="wrap foot-grid">
+    <div class="foot-about">
+      <a class="brand" href="./"><span class="brand-mark"><img src="stage_0.webp" width="30" height="30" alt=""></span><span>doomky</span></a>
+      <p>Doomky counts the Instagram Reels and YouTube Shorts you watch, and stops you at the limit you set. Made in India.</p>
+    </div>
+    <nav aria-labelledby="f-app"><h2 id="f-app">App</h2><ul>
+      <li><a href="https://github.com/shajith240/doomky-site/releases/latest/download/doomky.apk">Download for Android</a></li>
+      <li><a href="./#setup">How to install</a></li>
+      <li><a href="./#safety">Is it safe?</a></li>
+    </ul></nav>
+    <nav aria-labelledby="f-legal"><h2 id="f-legal">Legal</h2><ul>
+      <li><a href="privacy.html">Privacy policy</a></li>
+      <li><a href="terms.html">Terms of service</a></li>
+      <li><a href="community.html">Community guidelines</a></li>
+      <li><a href="delete-account.html">Delete your account</a></li>
+    </ul></nav>
+    <nav aria-labelledby="f-help"><h2 id="f-help">Support</h2><ul>
+      <li><a href="support.html">Help and contact</a></li>
+      <li><a href="mailto:shajith240@gmail.com">shajith240@gmail.com</a></li>
+      <li><a href="https://github.com/shajith240/doomky-site/issues">Report a problem</a></li>
+    </ul></nav>
   </div>
+  <div class="wrap foot-base"><p>&copy; 2026 Shajith Bathina. All rights reserved.</p><p>Not affiliated with Instagram, Meta, YouTube or Google.</p></div>
 </footer>
 
 <div class="bar">
